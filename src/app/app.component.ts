@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { NgxMultiModalModule,NgxModalStack } from 'ngx-multi-modal';
+
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'integration';
+
+  constructor(public modalService: NgxModalStack){
+    
+  }
 }

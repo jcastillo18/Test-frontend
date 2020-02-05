@@ -6,8 +6,109 @@
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+   <!-- Favicon -->
+   <link href="./assets/img/brand/favicon.png" rel="icon" type="image/png">
+   <!-- Fonts -->
+   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+   <!-- Icons -->
+   <link href="./assets/js/plugins/nucleo/css/nucleo.css" rel="stylesheet" />
+   <link href="./assets/js/plugins/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet" />
+   <!-- CSS Files -->
+   <link href="./assets/css/argon-dashboard.css?v=1.1.2" rel="stylesheet" />
 </head>
 <body>
   <app-root></app-root>
+
+  <!--   Core   -->
+  <script src="./assets/js/plugins/jquery/dist/jquery.min.js"></script>
+  <script src="./assets/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <!--   Optional JS   -->
+  <script src="./assets/js/plugins/chart.js/dist/Chart.min.js"></script>
+  <script src="./assets/js/plugins/chart.js/dist/Chart.extension.js"></script>
+  <!--   Argon JS   -->
+  <script src="./assets/js/argon-dashboard.min.js?v=1.1.2"></script>
+  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+  
+  <script>
+    window.TrackJS &&
+      TrackJS.install({
+        token: "ee6fab19c5a04ac1a32a645abde4613a",
+        application: "argon-dashboard-free"
+      });
+  </script>
+  <script>
+    $(document).ready(function(){
+  
+  var current_fs, next_fs, previous_fs; //fieldsets
+  var opacity;
+  
+  $(".next").click(function(){
+  
+  current_fs = $(this).parent();
+  next_fs = $(this).parent().next();
+  
+  //Add Class Active
+  $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+  
+  //show the next fieldset
+  next_fs.show();
+  //hide the current fieldset with style
+  current_fs.animate({opacity: 0}, {
+  step: function(now) {
+  // for making fielset appear animation
+  opacity = 1 - now;
+  
+  current_fs.css({
+  'display': 'none',
+  'position': 'relative'
+  });
+  next_fs.css({'opacity': opacity});
+  },
+  duration: 600
+  });
+  });
+  
+  $(".previous").click(function(){
+  
+  current_fs = $(this).parent();
+  previous_fs = $(this).parent().prev();
+  
+  //Remove class active
+  $("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+  
+  //show the previous fieldset
+  previous_fs.show();
+  
+  //hide the current fieldset with style
+  current_fs.animate({opacity: 0}, {
+  step: function(now) {
+  // for making fielset appear animation
+  opacity = 1 - now;
+  
+  current_fs.css({
+  'display': 'none',
+  'position': 'relative'
+  });
+  previous_fs.css({'opacity': opacity});
+  },
+  duration: 600
+  });
+  });
+  
+  $('.radio-group .radio').click(function(){
+  $(this).parent().find('.radio').removeClass('selected');
+  $(this).addClass('selected');
+  });
+  
+  $(".submit").click(function(){
+  return false;
+  })
+  
+  });
+  </script>
+  
+  
+  
+ 
 </body>
 </html>
